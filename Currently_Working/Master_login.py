@@ -30,6 +30,9 @@ def UserVerification(UserId, MasterPass):
         print("No user found") # if pair is not matched 
         return 2 #this is for debuging 
 Var=UserVerification(UserId, MasterPass)# the value that is returned ie the userid is stored in object Var 
-c.execute("select * from "+Var )#the mathcing Table is then selected
-for i in c:#all the table entries are printed
-    print(i)
+if Var != 2:
+    c.execute("select * from "+Var )#the mathcing Table is then selected
+    for i in c:#all the table entries are printed
+        print(i)
+else:
+    print("User id password do not match")
