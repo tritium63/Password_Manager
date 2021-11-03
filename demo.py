@@ -1,6 +1,6 @@
 import mysql.connector
 # logging into my local mysql server for trial
-conn = mysql.connector.connect(host = 'localhost', user ='root', password='adimysql')
+conn = mysql.connector.connect(host = 'localhost', user ='root', password='Aditya2004@google')
 
 c= conn.cursor()
 
@@ -63,3 +63,4 @@ def addUser(name):
 #this was description of table user1, table1 is currently an empty set
 
 c.close()
+addUser("Aditya")
