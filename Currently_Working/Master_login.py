@@ -27,8 +27,8 @@ def UserVerification(UserId, MasterPass):
         #print("Id pass Match") For debugibg :D
         return UserId #this is what the function returns 
     else:
-        print("No user found") # if pair is not matched 
-        return 2 #this is for debuging 
+        #print("No user found") # if pair is not matched 
+        return 2 #If password id pair does not match  
 Var=UserVerification(UserId, MasterPass)# the value that is returned ie the userid is stored in object Var 
 if Var != 2:
     c.execute("select * from "+Var )#the mathcing Table is then selected
