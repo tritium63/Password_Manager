@@ -43,17 +43,22 @@ Service=input("Enter Service Name : ")
 
 def Searching(Service, Var):
     c.execute("select service from "+Var)
-    for i in c:
+    VarList=c.fetchall()
+    # print(XX)
+    for i in VarList:
         if i == (Service,):
+            pass  # Temp Statement
             # print(i)
             # return i
+            # print("select * from " +Var+ " where SERVICE =" + "\""+Service +"\""+";")
             c.execute("select * from " +Var+ " where SERVICE =" + "\""+Service +"\""+";")
-            for d in c:
-                print(d)
-
+            # for d in c:
+            #     print(d)
+            x=c.fetchall()
+            print(x)
 if Var != 2:#Exception handled "str + int" 
     Searching(Service, Var)
-    print("ALL OK")
+    # print("ALL OK")
 
 
 # select * from Var wherer  SERVICE = "TableIndex" 
