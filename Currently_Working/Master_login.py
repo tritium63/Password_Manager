@@ -22,7 +22,7 @@ def UserVerification(UserId, MasterPass):
         for j in i: #pair is seperated and user id is checked with the one in database
             if j==UserId:   #if user id is matched 
                 templis.append(i)#then the id password pair represented by i is appenden in to the empty list 
-    #   print(templis)   for debuging
+        #print(templis) #for debuging
     if templis == [(UserId, MasterPass)] : #now id pass pair is checked again to what the user has entred 
         #print("Id pass Match") For debugibg :D
         return UserId #this is what the function returns 
@@ -32,7 +32,48 @@ def UserVerification(UserId, MasterPass):
 Var=UserVerification(UserId, MasterPass)# the value that is returned ie the userid is stored in object Var 
 if Var != 2:
     c.execute("select * from "+Var )#the mathcing Table is then selected
-    for i in c:#all the table entries are printed
-        print(i)
+    for i in c:     #all the table entries are printed
+        pass         
+        # print(i)
 else:
     print("User id password do not match")
+
+# UID=input("Enter User Name : ")
+Service=input("Enter Service Name : ")
+
+def Searching(Service, Var):
+    c.execute("select service from "+Var)
+    for i in c:
+        if i == (Service,):
+            # print(i)
+            # return i
+            c.execute("select * from " +Var+ " where SERVICE =" + "\""+Service +"\""+";")
+            for d in c:
+                print(d)
+
+if Var != 2:#Exception handled "str + int" 
+    Searching(Service, Var)
+    print("ALL OK")
+
+
+# select * from Var wherer  SERVICE = "TableIndex" 
+
+
+
+
+
+# Table structure Head Login 
+# +----------+-------------+------+-----+---------+-------+
+# | Field    | Type        | Null | Key | Default | Extra |
+# +----------+-------------+------+-----+---------+-------+
+# | USERID   | varchar(32) | YES  |     | NULL    |       |
+# | PASSWORD | varchar(32) | YES  |     | NULL    |       |
+# +----------+-------------+------+-----+---------+-------+
+# Table structure User
+# +----------+-------------+------+-----+---------+-------+
+# | Field    | Type        | Null | Key | Default | Extra |
+# +----------+-------------+------+-----+---------+-------+
+# | USERID   | varchar(32) | YES  |     | NULL    |       |
+# | PASSWORD | varchar(32) | YES  |     | NULL    |       |
+# | SERVICE  | varchar(32) | YES  |     | NULL    |       |
+# +----------+-------------+------+-----+---------+-------+
