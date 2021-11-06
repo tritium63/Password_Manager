@@ -39,15 +39,20 @@ else:
     print("User id password do not match")
 
 # UID=input("Enter User Name : ")
-Service=input("Enter Service Name : ")
-
+Service=input("Enter Service Name : ") 
+# Service input acquired 
+# Searching Fn defined with calling attributes "Service" and "Var". User ID Stored in Var 
+# 1st execute statement selects all entreies in users table 
+# stored in VarList
+# The service is matched with the users input 
+# if they match corresponding service with it's id and password is selected and printed
 def Searching(Service, Var):
     c.execute("select service from "+Var)
     VarList=c.fetchall()
     # print(XX)
     for i in VarList:
         if i == (Service,):
-            pass  # Temp Statement
+            # pass  # Temp Statement
             # print(i)
             # return i
             # print("select * from " +Var+ " where SERVICE =" + "\""+Service +"\""+";")
@@ -56,6 +61,8 @@ def Searching(Service, Var):
             #     print(d)
             x=c.fetchall()
             print(x)
+        else:
+            print("No service Found")
 if Var != 2:#Exception handled "str + int" 
     Searching(Service, Var)
     # print("ALL OK")
