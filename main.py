@@ -25,7 +25,13 @@ def addUser(USERID,PASSWORD):
     c.execute(query2)
     conn.commit()
     return 0
-            
+
+def addData(USERID,service,username,password):
+    #INSERT INTO USERID (USERID,PASSWORD,SERVICE) VALUES (username,password,service) \
+    query =f"INSERT INTO {USERID} (USERID,PASSWORD,SERVICE) VALUES (\"{username}\",\"{password}\",\"{service}\");"
+    c.execute(query)
+    conn.commit()
+    print("commited successfully")          
 
 
 
