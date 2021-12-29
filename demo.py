@@ -1,6 +1,6 @@
 import mysql.connector
 # logging into my local mysql server for trial
-conn = mysql.connector.connect(host = 'localhost', user ='root', password='adimysql')
+conn = mysql.connector.connect(host = 'localhost', user ='aditya', password='adimysql')
 
 c= conn.cursor()
 
@@ -8,24 +8,27 @@ c= conn.cursor()
 c.execute('use my_db')
 
 #fucntion to create user as explained by in the image sent on whatsapp
-def addUser(name):
+def addUser(USERID,PASSWORD):
 
     #adds user to users table
-    #i don't need to specify user id as i have used auto_increment attribute while creating the users table
-    #therefore only specifing name
-    query1 = f'INSERT INTO `users` (name) VALUES ("{name}");'
-    c.execute(query1)
+    c.execute("select USERID from headlogin")
+    userList = c.fetchall()
+    for i in userList:
+        if USERID==i[0]:
+            print("sorry the username alredy exists")
+            return 1
+        else:
+            query1 = f'INSERT INTO headlogin (USERID,PASSWORD) VALUES (\"{USERID}\",\"{PASSWORD}\")'
+            c.execute(query1)
+            c.commit()
+            #create table USERID(USERID VARCHAR(32),PASSWORD VARCHAR(32),SERVICE VARCHAR(32));
+            query2 = f"create table {USERID}(USERID VARCHAR(32),PASSWORD VARCHAR(32),SERVICE VARCHAR(32));"
+            c.execute(query2)
+            c.commit()
+            return 0
 
-    #since i have used auto increant therefore the latest user will have largest value of uesr_id;
-    #hence selecting the max id to create a table on its name as user<id>
-    q = "select max(user_id) from users;"
-    c.execute(q)#<-max id stored in c
-    x = c.fetchall()#<-fetching max id from c into x
-    n=x[0][0] #<-the id was stored as list in list-> [[id]] therefore i added [0][0] meaning 0th index of 0th list in the list x
-    # after finally getting the id given to the current user we can create table on his name
-    query2=f"CREATE TABLE user{n}(website varchar(100), username varchar(50), pass varchar(20));"
-    c.execute(query2)
-
+            
+conn.close()
 
 # addUser("Aditya")
 # addUser("Aditya Bakshi")
@@ -61,5 +64,3 @@ def addUser(name):
 # +----------+--------------+------+-----+---------+-------+
 
 #this was description of table user1, table1 is currently an empty set
-
-c.close()
