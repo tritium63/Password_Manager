@@ -1,0 +1,18 @@
+Host:
+
+bk3mjn0digzdwyfts1ir-mysql.services.clever-cloud.com
+
+
+Database Name :
+
+bk3mjn0digzdwyfts1ir
+
+
+User :
+
+umterzn51pcaf9nw
+
+
+Password :
+
+sNwAPpmFIKjYG17iwZKJ
