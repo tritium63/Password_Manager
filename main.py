@@ -36,10 +36,10 @@ def addData(USERID,service,username,password):
 
 
 def InputAndCalling():
-    global UserId, MasterPass, Var
+    global UserId, MasterPass, ReturnID
     UserId=input("enter user id : ")
     MasterPass=input("Enter Master Password : ")
-    Var=UserVerification(UserId, MasterPass)# the value that is returned ie the userid is stored in object Var 
+    ReturnID=UserVerification(UserId, MasterPass)# the value that is returned ie the userid is stored in object ReturnID 
 
 # Function is defined with attributes UserId, MasterPass these values 
 # are collected from the user the function is called at the end with the same values
@@ -62,41 +62,31 @@ def UserVerification(UserId, MasterPass):
         #print("No user found") # if pair is not matched 
         return 2 #If password id pair does not match  
 InputAndCalling()
-if Var != 2:
+
+if ReturnID != 2:
     print("Connection sucesfull")
-    # c.execute("select * from "+Var )#the mathcing Table is then selected
-    # for i in c:     #all the table entries are printed
-    #     
-    #     pass         
-    #     # print(i)
 else:
     print("User id password do not match")
 
-# UID=input("Enter User Name : ")
-# Service=input("Enter Service Name : ") 
 # Service input acquired 
-# Searching Fn defined with calling attributes "Service" and "Var". User ID Stored in Var 
+# Searching Fn defined with calling attributes "Service" and "ReturnID". User ID Stored in ReturnID 
 # 1st execute statement selects all entreies in users table 
-# stored in VarList
+# stored in AquredServices
 # The service is matched with the users input 
 # if they match corresponding service with it's id and password is selected and printed
-# def Searching(Service, Var):
-#     c.execute("select service from "+Var)
-#     VarList=c.fetchall()
-#     # print(XX)
-#     for i in VarList:
-#         if i == (Service,):
-#             # pass  # Temp Statement
-#             # print(i)
-#             # return i
-#             # print("select * from " +Var+ " where SERVICE =" + "\""+Service +"\""+";")
-#             c.execute("select * from " +Var+ " where SERVICE =" + "\""+Service +"\""+";")
-#             # for d in c:
-#             #     print(d)
-#             x=c.fetchall()
-#             print(x)
-#         else:
-#             print("No service Found")
-# if Var != 2:#Exception handled "str + int" 
-#     Searching(Service, Var)
+def Searching():
+    
+    UID=ReturnID
+    Service=input("Enter Service Name : ") 
+    c.execute("select service from "+ReturnID)
+    AquredServices=c.fetchall()
+    # print(XX)
+    for i in AquredServices:
+        if i == (Service,):
+            c.execute(f"select * from {ReturnID} where service=\"{Service}\" ;")
+            x=c.fetchall()
+            print(x)
+        else:
+            print("No service Found")
+Searching()
 conn.close()
