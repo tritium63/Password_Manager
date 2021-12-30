@@ -6,7 +6,7 @@ c= conn.cursor()
 
 #selected the database
 # c.execute('use my_db')
-
+ReturnID="TestID2"
 #fucntion to create user as explained by in the image sent on whatsapp
 def addUser(USERID,PASSWORD):
 
@@ -35,38 +35,33 @@ def addData(USERID,service,username,password):
 
 
 
-def InputAndCalling():
-    global UserId, MasterPass, ReturnID
-    UserId=input("enter user id : ")
-    MasterPass=input("Enter Master Password : ")
-    ReturnID=UserVerification(UserId, MasterPass)# the value that is returned ie the userid is stored in object ReturnID 
 
-# Function is defined with attributes UserId, MasterPass these values 
+# Function is defined with attributes MasterID, MasterPass these values 
 # are collected from the user the function is called at the end with the same values
 # the function also has a return value which is the user id this will be further used to select the users
 # specific table 
 
-def UserVerification(UserId, MasterPass):
+def UserVerification(MasterID, MasterPass):
     templis=[]
     #An empty list is created to store the user id and password#
     c.execute("select * from headlogin")#selecting all user id and passwords together
     for i in c:     #itterating through user id and password as pair# 
-        for j in i: #pair is seperated and user id is checked with the one in database
-            if j==UserId:   #if user id is matched 
-                templis.append(i)#then the id password pair represented by i is appenden in to the empty list 
+            #pair is seperated and user id is checked with the one in database
+        if i[0]==MasterID:   #if user id is matched 
+            templis.append(i)#then the id password pair represented by i is appenden in to the empty list 
         #print(templis) #for debuging
-    if templis == [(UserId, MasterPass)] : #now id pass pair is checked again to what the user has entred 
+    if templis == [(MasterID, MasterPass)] : #now id pass pair is checked again to what the user has entred 
         #print("Id pass Match") For debugibg :D
-        return UserId #this is what the function returns 
+        return MasterID #this is what the function returns 
     else:
         #print("No user found") # if pair is not matched 
         return 2 #If password id pair does not match  
-InputAndCalling()
+# ReturnID=UserVerification(MasterID, MasterPass)# the value that is returned ie the userid is stored in object ReturnID 
 
-if ReturnID != 2:
-    print("Connection sucesfull")
-else:
-    print("User id password do not match")
+# if ReturnID != 2:
+#     print("Connection sucesfull")
+# else:
+#     print("User id password do not match")
 
 # Service input acquired 
 # Searching Fn defined with calling attributes "Service" and "ReturnID". User ID Stored in ReturnID 
@@ -74,10 +69,8 @@ else:
 # stored in AquredServices
 # The service is matched with the users input 
 # if they match corresponding service with it's id and password is selected and printed
-def Searching():
-    
+def Searching(Service):
     UID=ReturnID
-    Service=input("Enter Service Name : ") 
     c.execute("select service from "+ReturnID)
     AquredServices=c.fetchall()
     # print(XX)
@@ -88,5 +81,22 @@ def Searching():
             print(x)
         else:
             print("No service Found")
-Searching()
+
+
+while True:
+    Flow=int(input("enter no"))
+    if Flow==0:
+        break
+    if Flow==1:
+        addUser(input("Uid"), input("Pas"))
+    if Flow==2:
+        addData(input("USERID"),input("SERVICE"),input("USERNAME"),input("PASSWORD"))
+    if Flow==3:
+        ReturnID=UserVerification(input("Uid"), input("Pas"))
+        if ReturnID != 2:
+            print("Connection sucesfull")
+        else:
+            print("User id password do not match")
+    if Flow==4:
+        Searching(input("Service Name"))
 conn.close()
