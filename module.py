@@ -41,23 +41,23 @@ def UserVerification(MasterID, MasterPass,con):
         #print(templis) #for debuging
     if templis == [(MasterID, MasterPass)] : #now id pass pair is checked again to what the user has entred 
         #print("Id pass Match") For debugibg :D
-        return MasterID #this is what the function returns 
+        return True #this is what the function returns 
     else:
         #print("No user found") # if pair is not matched 
-        return 2 #If password id pair does not match  
+        return False #If password id pair does not match  
 
 
 
-def Searching(Service,id,con):
-    UID=id
+def Searching(Service,MasterID,con):
+    UID=MasterID
     c=con.cursor()
-    c.execute("select service from "+id)
+    c.execute("select service from "+MasterID)
     AquredServices=c.fetchall()
     
     # print(XX)
     for i in AquredServices:
         if i == (Service,):
-            c.execute(f"select * from {id} where service=\"{Service}\" ;")
+            c.execute(f"select * from {MasterID} where service=\"{Service}\" ;")
             x=c.fetchall()
             print(x)
         else:
