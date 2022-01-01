@@ -3,10 +3,22 @@ from os import terminal_size
 from tkinter import *
 from tkinter.font import BOLD
 from PIL import Image, ImageTk
+from module import *
+
+
+
 root=Tk()
 #functions for buttons and other widgets
-def passval():
-    print("Record entered successfully")
+def SubmitFn():
+    MID=userentry.get()
+    MPWD=passentry.get()
+    print(MID, MPWD)
+    if UserVerification(MID,MPWD,conn):
+        print("Woho")
+    else:
+        print("Opps")        
+
+
 
 #title
 root.geometry("1200x700")
@@ -48,7 +60,7 @@ passentry.grid(row=2,column=1,padx=10)
 
 
 #Creating submit button
-submitBtn=Button(loginLabel, bg="grey", text="Submit",fg="white",command=passval)
+submitBtn=Button(loginLabel, bg="grey", text="Submit",fg="white",command=SubmitFn)
 submitBtn.grid(row=3,column=1)
 
 
