@@ -41,10 +41,10 @@ def UserVerification(MasterID, MasterPass,con):
         #print(templis) #for debuging
     if templis == [(MasterID, MasterPass)] : #now id pass pair is checked again to what the user has entred 
         #print("Id pass Match") For debugibg :D
-        return MasterID #this is what the function returns 
+        return True #this is what the function returns 
     else:
         #print("No user found") # if pair is not matched 
-        return 2 #If password id pair does not match  
+        return False #If password id pair does not match  
 
 
 
