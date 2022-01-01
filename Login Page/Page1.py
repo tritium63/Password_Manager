@@ -14,9 +14,9 @@ def SubmitFn():
     MPWD=passentry.get()
     print(MID, MPWD)
     if UserVerification(MID,MPWD,conn):
-        print("Woho")
+        print("Login Sucessfull")
     else:
-        print("Opps")        
+        print("Login Unsucessfull")        
 
 
 
@@ -61,7 +61,6 @@ passentry.grid(row=2,column=1,padx=10)
 
 #Creating submit button
 submitBtn=Button(loginLabel, bg="grey", text="Submit",fg="white",command=SubmitFn)
-submitBtn.grid(row=3,column=1)
 
 
 root.mainloop()
