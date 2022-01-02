@@ -30,13 +30,13 @@ generatorWidget=Label(bgLabel,bg="black")
 # generatorWidget.place(relx=0.5,rely=0.5,anchor=CENTER)
 genSet.addWi(generatorWidget)
 genSet.place(generatorWidget, relx=0.5,rely=0.5, anchor=CENTER)
-#Heading Text
+# Heading Text
 headText=Label(generatorWidget,text="New UID and Password Generation", font=headfont_tuple,bg="black",fg="white",padx=30)
 # headText.grid(row=0,column=1)
 genSet.addWi(headText)
 genSet.grid(headText,row=0,column=1)
 
-#entry fields
+# #entry fields
 userID=Label(generatorWidget,text="User ID:",font=generalFont,bg="black",fg="white",pady=20)
 # userID.grid(row=1,column=0)
 genSet.addWi(userID)
@@ -51,7 +51,7 @@ genSet.grid(,row=2,column=0)
 serviceName=Label(generatorWidget,text="Service Name:",font=generalFont,bg="black",fg="white",pady=10)
 # serviceName.grid(row=3,column=0)
 genSet.addWi(serviceName)
-genSet.grid(passWord,row=3,column=0)
+genSet.grid(serviceName,row=3,column=0)
 
 
 userIDval=Entry(generatorWidget,width=50)
