@@ -72,4 +72,7 @@ genSet.grid(submitBtn,row=4,column=1,pady=10)
 #setting initial screen
 genSet.create()
 
+
+
+
 root.mainloop()
