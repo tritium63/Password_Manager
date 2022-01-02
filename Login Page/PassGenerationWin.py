@@ -46,7 +46,7 @@ genSet.grid(userID,row=1,column=0)
 passWord=Label(generatorWidget,text="Generated Password:",font=generalFont,bg="black",fg="white")
 # passWord.grid(row=2,column=0)
 genSet.addWi(passWord)
-genSet.grid(passWord,row=2,column=0)
+genSet.grid(,row=2,column=0)
 
 serviceName=Label(generatorWidget,text="Service Name:",font=generalFont,bg="black",fg="white",pady=10)
 # serviceName.grid(row=3,column=0)
