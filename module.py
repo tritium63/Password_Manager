@@ -59,6 +59,7 @@ def Searching(Service,MasterID,con):
         if i == (Service,):
             c.execute(f"select * from {MasterID} where service=\"{Service}\" ;")
             x=c.fetchall()
-            print(x)
+            return x
         else:
             print("No service Found")
+            return False
