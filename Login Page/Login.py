@@ -67,5 +67,12 @@ set1.grid(passentry,row=2,column=1,padx=10)
 submitBtn=set1.addWi(Button(loginLabel, bg="grey", text="Submit",fg="white",command=SubmitFn))
 set1.grid(submitBtn,row=3,column=1)
 
+
+#sign up button
+questionLabel=set1.addWi(Label(loginLabel,bg="black",text="Don't have an account? Sign Up.",fg="white",font=("Comic Sans MS",10,"bold")))
+set1.grid(questionLabel,row=4,column=1,padx=30)
+signup=set1.addWi(Button(loginLabel, bg="grey",text="Sign Up", fg="white"))
+set1.grid(signup,row=5,column=1)
+
 set1.create()
 root.mainloop()
