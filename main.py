@@ -15,7 +15,7 @@ def SubmitFn():
     MPWD=passentry.get()
     print(MID, MPWD)
     if UserVerification(MID,MPWD,conn):
-        switch(set1,set2)
+        switch(LoginPage,MenuPage)
         MasterID = MID
         uservalue.set('')
         passvalue.set('')
@@ -28,65 +28,65 @@ def SubmitFn():
 root.geometry("1200x700")
 root.title("Password Manager - Login Page")
 
-set1 = wiSet()
+LoginPage = wiSet()
 #setting background image
 bgImage=Image.open("Background Design - Password Manager.jpg") 
 bgImageTk= ImageTk.PhotoImage(bgImage)
 bgLabel = Label(image=bgImageTk)
-set1.addWi(bgLabel)
-set1.pack(bgLabel,fill=BOTH,expand=TRUE)
+LoginPage.addWi(bgLabel)
+LoginPage.pack(bgLabel,fill=BOTH,expand=TRUE)
 
 #login widget
-loginLabel=set1.addWi(Label(bgLabel,bg="black"))
-set1.place(loginLabel,rely=0.5,relx=0.5,anchor=CENTER)
+loginLabel=LoginPage.addWi(Label(bgLabel,bg="black"))
+LoginPage.place(loginLabel,rely=0.5,relx=0.5,anchor=CENTER)
 
 #variables for fonts used
 usualfont_tuple=("Comic Sans MS",12,"bold")
 headFont_tuple=("Comic Sans MS",16,"bold")
 
 #Welcome Text 
-welText=set1.addWi(Label(loginLabel, text="Welcome To Password Manager", font =headFont_tuple, bg="black",fg="white"))
-set1.grid(welText,row=0,column=1)
+welText=LoginPage.addWi(Label(loginLabel, text="Welcome To Password Manager", font =headFont_tuple, bg="black",fg="white"))
+LoginPage.grid(welText,row=0,column=1)
 
 #taking entries of username and password
-username=set1.addWi(Label(loginLabel, text="Username: ",font=usualfont_tuple,bg="black",fg="white",pady=12,padx=12))
-password=set1.addWi(Label(loginLabel,text="Paswword: ",font=usualfont_tuple,bg="black",fg="white"))
-set1.grid(username,row=1,column=0)
-set1.grid(password,row=2,column=0)
+username=LoginPage.addWi(Label(loginLabel, text="Username: ",font=usualfont_tuple,bg="black",fg="white",pady=12,padx=12))
+password=LoginPage.addWi(Label(loginLabel,text="Paswword: ",font=usualfont_tuple,bg="black",fg="white"))
+LoginPage.grid(username,row=1,column=0)
+LoginPage.grid(password,row=2,column=0)
 
 uservalue=StringVar()
 passvalue=StringVar()
 
-userentry=set1.addWi(Entry(loginLabel, textvariable=uservalue,width=40 ))
-passentry=set1.addWi(Entry(loginLabel,textvariable=passvalue,width=40))
-set1.grid(userentry,row=1,column=1,padx=10)
-set1.grid(passentry,row=2,column=1,padx=10)
+userentry=LoginPage.addWi(Entry(loginLabel, textvariable=uservalue,width=40 ))
+passentry=LoginPage.addWi(Entry(loginLabel,textvariable=passvalue,width=40))
+LoginPage.grid(userentry,row=1,column=1,padx=10)
+LoginPage.grid(passentry,row=2,column=1,padx=10)
 
 
 
 
 #Creating submit button
-submitBtn=set1.addWi(Button(loginLabel, bg="grey", text="LOGIN",fg="white",command=SubmitFn))
-set1.grid(submitBtn,row=3,column=1)
+submitBtn=LoginPage.addWi(Button(loginLabel, bg="grey", text="LOGIN",fg="white",command=SubmitFn))
+LoginPage.grid(submitBtn,row=3,column=1)
 
-set1.create()
+LoginPage.create()
 
 
 # createing the menu page
 
 def logout():
     global MasterID
-    switch(set2,set1)
+    switch(MenuPage,LoginPage)
     MasterID = ""
-set2 = wiSet()
+MenuPage = wiSet()
 
-btn1 = set2.addWi(Button(root,text="log out",command=logout))
-btn2 = set2.addWi(Button(root,text="retrieve password",command = lambda :switch(set2,Display)))
-btn3 = set2.addWi(Button(root,text="add record", command=lambda :switch(set2, genSet)))
+btn1 = MenuPage.addWi(Button(root,text="log out",command=logout))
+btn2 = MenuPage.addWi(Button(root,text="retrieve password",command = lambda :switch(MenuPage,Display)))
+btn3 = MenuPage.addWi(Button(root,text="add record", command=lambda :switch(MenuPage, genSet)))
 
-set2.pack(btn1)
-set2.pack(btn2)
-set2.pack(btn3)
+MenuPage.pack(btn1)
+MenuPage.pack(btn2)
+MenuPage.pack(btn3)
 
 
 Display=wiSet()
@@ -119,7 +119,7 @@ Display.pack(Exit)
 def Exit():
     ListBox.delete(0,END)
     sBox.set('')
-    switch(Display,set2)
+    switch(Display,MenuPage)
     
 
 
@@ -151,6 +151,9 @@ def passvals():
         messagebox.showerror("Invalid Input", "Feilds Cannot be Empty")
     else:
         addData(MasterID,TempService, UIDD, TempPass, conn)
+        Pass.set("")
+        UVar.set("")
+        SVar.set("")
 
 #creating set for generator page 
 genSet=wiSet()
@@ -202,13 +205,13 @@ serviceName=Label(generatorWidget,text="Service Name:",font=generalFont,bg="blac
 genSet.addWi(serviceName)
 genSet.grid(serviceName,row=3,column=0)
 
-
-userIDval=Entry(generatorWidget,width=75)
+UVar=StringVar()
+userIDval=Entry(generatorWidget,width=75, textvariable=UVar)
 # userIDval.grid(row=1,column=1)
 genSet.addWi(userIDval)
 genSet.grid(userIDval,row=1,column=1,columnspan=2)
-
-serviceNameval=Entry(generatorWidget,width=75)
+SVar=StringVar()
+serviceNameval=Entry(generatorWidget,width=75, textvariable=SVar)
 # serviceNameval.grid(row=3,column=1)
 genSet.addWi(serviceNameval)
 genSet.grid(serviceNameval,row=3,column=1,columnspan=2)
@@ -222,7 +225,14 @@ GenPass=Button(generatorWidget,text="Generate Random Password",bg="grey",fg="whi
 genSet.addWi(GenPass)
 genSet.grid(GenPass,row=4,column=1,pady=10)
 
-GoBack=genSet.addWi(Button(generatorWidget,text="GO Back !",bg="grey",fg="white"))
+
+def GenSetBack():
+    Pass.set("")
+    UVar.set("")
+    SVar.set("")
+    switch(genSet, MenuPage)
+
+GoBack=genSet.addWi(Button(generatorWidget,text="GO Back !",bg="grey",fg="white",command=GenSetBack))
 genSet.grid(GoBack,row=4,column=2,pady=10)
 
 
