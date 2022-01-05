@@ -1,18 +1,40 @@
 from tkinter import *
 from module import *
+from tkWinSwitch import *
 
 root=Tk()
 
-DisplayF=Label(root)
-DisplayF.pack(fill=BOTH,expand=TRUE)
+Display=wiSet()
 
-ListBoxLabel=Label(DisplayF, text="All Ent")
-ListBox=Listbox(DisplayF, height = 10, width = 50, bg = "grey", activestyle = 'dotbox')
+ListBoxLabel=Label(text="LogIn")
+ListBox=Listbox(height = 10, width = 50, bg = "grey", activestyle = 'dotbox')
+SearchBox=Entry(text="Enter Service Name")
+Search=Button(text="Search", command= lambda : ShowServiceOut())
+Exit=Button(text="Exit", command= lambda : Exit())
 
+
+Display.addWi(ListBoxLabel)
+Display.addWi(ListBox)
+Display.addWi(SearchBox)
+Display.addWi(Search)
+Display.addWi(Exit)
+
+
+Display.pack(ListBoxLabel)
+Display.pack(ListBox)
+Display.pack(SearchBox)
+Display.pack(Search)
+Display.pack(Exit)
+
+
+def Exit():
+    pass
 
 
 def ShowServiceOut():
-    ServiceOut=Searching(Service="gmail", MasterID="TestID", con=conn)
+    ListBox.delete(0,END)
+    Service=SearchBox.get()
+    ServiceOut=Searching(Service, MasterID="TestID", con=conn)
     if ServiceOut != False:
         All=[]
         All.append(ServiceOut)
@@ -22,11 +44,8 @@ def ShowServiceOut():
             N+=1
     else:
         pass
-print(ShowServiceOut())
-
-ListBoxLabel.pack()
-ListBox.pack()
 
 
+Display.create()
 
 root.mainloop()

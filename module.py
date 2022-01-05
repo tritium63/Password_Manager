@@ -53,7 +53,11 @@ def Searching(Service,MasterID,con):
     c=con.cursor()
     c.execute("select service from "+MasterID)
     AquredServices=c.fetchall()
-    
+    if Service=="":
+        c.execute(f"select * from {MasterID};")
+        AllServ=c.fetchall()
+        return AllServ
+
     # print(XX)
     for i in AquredServices:
         if i == (Service,):
