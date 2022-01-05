@@ -3,22 +3,20 @@ from os import terminal_size
 from tkinter import *
 from tkinter.font import BOLD
 from PIL import Image, ImageTk
-# from module import *
+from module import *
 from tkWinSwitch import *
 
 
 root=Tk()
 #functions for buttons and other widgets
 def SubmitFn():
-    pass
-# def SubmitFn():
-#     MID=userentry.get()
-#     MPWD=passentry.get()
-#     print(MID, MPWD)
-#     if UserVerification(MID,MPWD,conn):
-#         print("Woho")
-#     else:
-#         print("Opps")        
+    MID=userentry.get()
+    MPWD=passentry.get()
+    print(MID, MPWD)
+    if UserVerification(MID,MPWD,conn):
+        print("Woho")
+    else:
+        print("Opps")        
 
 
 
