@@ -1,9 +1,0 @@
-# c.execute("show databases")
-# for i in c:
-#     print(i)
-
-# x=c.fetchall()
-# print(x)
-# c.execute("use Testing-db")
-# print("database selected")
-# print(x)
