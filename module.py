@@ -11,7 +11,6 @@ def addUser(USERID,PASSWORD,con):
     userList = c.fetchall()
     for i in userList:
         if USERID==i[0]:
-            print("sorry the username alredy exists")
             return 1
     query1 = f'INSERT INTO headlogin (USERID,PASSWORD) VALUES (\"{USERID}\",\"{PASSWORD}\")'
     c.execute(query1)

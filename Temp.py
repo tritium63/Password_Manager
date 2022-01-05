@@ -1,15 +1,47 @@
 from tkinter import *
+from tkWinSwitch import *
+from module import *
+def Info():
+    x=IDInput.get()
+    y=PasswordInput.get()
+    z=ConfpassInput.get()
+    if y==z:
+        addUser(x,y,conn)     
+
+root=Tk()
+
+SignUp= wiSet()
+
+ID=Label(text="User ID")
+SignUp.addWi(ID)
+SignUp.grid(ID,row=0,column=0)
+
+PassWord=Label(text="Password")
+SignUp.addWi(PassWord)
+SignUp.grid(PassWord,row=1,column=0)
+
+ConfPassword=Label(text="Confirm Password")
+SignUp.addWi(ConfPassword)
+SignUp.grid(ConfPassword,row=2,column=0)
 
 
-top = Tk()
-top.geometry("450x300")
-	
+IDInput=Entry()
+SignUp.addWi(IDInput)
+SignUp.grid(IDInput,row=0,column=1)
 
-user_name = Label(top, text = "Username").place(x = 40, y = 60)
-user_password = Label(top, text = "Password").place(x = 40, y = 100)
-submit_button = Button(top, text = "Submit").place(x = 40, y = 130)
-user_name_input_area = Entry(top, width = 30).place(x = 110, y = 60)
-user_password_entry_area = Entry(top, width = 30).place(x = 110, y = 100)
-	
-top.mainloop()
+PasswordInput=Entry()
+SignUp.addWi(PasswordInput)
+SignUp.grid(PasswordInput,row=1,column=1)
 
+ConfpassInput=Entry()
+SignUp.addWi(ConfpassInput)
+SignUp.grid(ConfpassInput,row=2,column=1)
+
+Signup_Bttn=Button(text="SignUp !",command=Info)
+SignUp.addWi(Signup_Bttn)
+SignUp.grid(Signup_Bttn,row=3, columnspan=2)
+
+
+SignUp.create()
+
+root.mainloop()

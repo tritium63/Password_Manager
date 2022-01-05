@@ -68,6 +68,9 @@ LoginPage.grid(passentry,row=2,column=1,padx=10)
 submitBtn=LoginPage.addWi(Button(loginLabel, bg="grey", text="LOGIN",fg="white",command=SubmitFn))
 LoginPage.grid(submitBtn,row=3,column=1)
 
+signbtn = Button(loginLabel,text="create a new account",command=lambda :switch(LoginPage,SignUp))
+LoginPage.addWi(signbtn)
+LoginPage.grid(signbtn,row=4,column = 1)
 LoginPage.create()
 
 
@@ -234,6 +237,66 @@ def GenSetBack():
 GoBack=genSet.addWi(Button(generatorWidget,text="GO Back !",bg="grey",fg="white",command=GenSetBack))
 genSet.grid(GoBack,row=4,column=2,pady=10)
 
+def Info():
+    x=IDInput.get()
+    y=PasswordInput.get()
+    z=ConfpassInput.get()
+    if x=="" or y == "" or z == "":
+        messagebox.showerror("Error","Field can not be empty")
+    else:
 
+        try:
+            if len(y)>32 or len(x)>32:
+                messagebox.showerror("error","Please enter values less than 32 character")
+            else:
+                if y==z:
+                    status = addUser(x,y,conn)
+                if status==1:
+                    messagebox.showerror("User alredy exit","Sorry the username is alredy in use,\nPlese try a different one.")
+        except:
+            messagebox.showerror("Error","some error occured")
+
+SignUp= wiSet()
+
+ID=Label(text="User ID")
+SignUp.addWi(ID)
+SignUp.grid(ID,row=0,column=0)
+
+PassWord=Label(text="Password")
+SignUp.addWi(PassWord)
+SignUp.grid(PassWord,row=1,column=0)
+
+ConfPassword=Label(text="Confirm Password")
+SignUp.addWi(ConfPassword)
+SignUp.grid(ConfPassword,row=2,column=0)
+
+s1 = StringVar()
+IDInput=Entry(textvariable=s1)
+SignUp.addWi(IDInput)
+SignUp.grid(IDInput,row=0,column=1)
+
+s2=StringVar()
+PasswordInput=Entry(textvariable=s2)
+SignUp.addWi(PasswordInput)
+SignUp.grid(PasswordInput,row=1,column=1)
+
+s3=StringVar()
+ConfpassInput=Entry(textvariable=s3)
+SignUp.addWi(ConfpassInput)
+SignUp.grid(ConfpassInput,row=2,column=1)
+
+Signup_Bttn=Button(text="SignUp !",command=Info)
+SignUp.addWi(Signup_Bttn)
+SignUp.grid(Signup_Bttn,row=3, columnspan=2)
+
+def sgGo():
+    s1.set("")
+    s2.set("")
+    s3.set("")
+    switch(SignUp,LoginPage)
+
+signBack=Button(text="Go Back",command=lambda :sgGo())
+SignUp.addWi(signBack)
+SignUp.grid(signBack,row=4, columnspan=2)
 
 root.mainloop()
