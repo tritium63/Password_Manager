@@ -290,8 +290,12 @@ SignUp.addWi(Signup_Bttn)
 SignUp.grid(Signup_Bttn,row=3, columnspan=2)
 
 def sgGo():
+    s1.set("")
+    s2.set("")
+    s3.set("")
+    switch(SignUp,LoginPage)
 
-signBack=Button(text="Go Back",command=lambda :switch(SignUp,LoginPage))
+signBack=Button(text="Go Back",command=lambda :sgGo())
 SignUp.addWi(signBack)
 SignUp.grid(signBack,row=4, columnspan=2)
 
