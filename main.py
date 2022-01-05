@@ -68,6 +68,9 @@ LoginPage.grid(passentry,row=2,column=1,padx=10)
 submitBtn=LoginPage.addWi(Button(loginLabel, bg="grey", text="LOGIN",fg="white",command=SubmitFn))
 LoginPage.grid(submitBtn,row=3,column=1)
 
+signbtn = Button(loginLabel,text="create a new account",command=lambda :switch(LoginPage,SignUp))
+LoginPage.addWi(signbtn)
+LoginPage.grid(signbtn,row=4,column = 1)
 LoginPage.create()
 
 
@@ -238,9 +241,20 @@ def Info():
     x=IDInput.get()
     y=PasswordInput.get()
     z=ConfpassInput.get()
-    if y==z:
-        addUser(x,y,conn)
+    if x=="" or y == "" or z == "":
+        messagebox.showerror("Error","Field can not be empty")
+    else:
 
+        try:
+            if len(y)>32 or len(x)>32:
+                messagebox.showerror("error","Please enter values less than 32 character")
+            else:
+                if y==z:
+                    status = addUser(x,y,conn)
+                if status==1:
+                    messagebox.showerror("User alredy exit","Sorry the username is alredy in use,\nPlese try a different one.")
+        except:
+            messagebox.showerror("Error","some error occured")
 
 SignUp= wiSet()
 
@@ -256,16 +270,18 @@ ConfPassword=Label(text="Confirm Password")
 SignUp.addWi(ConfPassword)
 SignUp.grid(ConfPassword,row=2,column=0)
 
-
-IDInput=Entry()
+s1 = StringVar()
+IDInput=Entry(textvariable=s1)
 SignUp.addWi(IDInput)
 SignUp.grid(IDInput,row=0,column=1)
 
-PasswordInput=Entry()
+s2=StringVar()
+PasswordInput=Entry(textvariable=s2)
 SignUp.addWi(PasswordInput)
 SignUp.grid(PasswordInput,row=1,column=1)
 
-ConfpassInput=Entry()
+s3=StringVar()
+ConfpassInput=Entry(textvariable=s3)
 SignUp.addWi(ConfpassInput)
 SignUp.grid(ConfpassInput,row=2,column=1)
 
@@ -273,6 +289,10 @@ Signup_Bttn=Button(text="SignUp !",command=Info)
 SignUp.addWi(Signup_Bttn)
 SignUp.grid(Signup_Bttn,row=3, columnspan=2)
 
+def sgGo():
 
+signBack=Button(text="Go Back",command=lambda :switch(SignUp,LoginPage))
+SignUp.addWi(signBack)
+SignUp.grid(signBack,row=4, columnspan=2)
 
 root.mainloop()
