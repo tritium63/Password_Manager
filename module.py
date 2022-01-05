@@ -1,4 +1,5 @@
 import mysql.connector
+import random, string
 conn = mysql.connector.connect(host = 'bk3mjn0digzdwyfts1ir-mysql.services.clever-cloud.com', user ='umterzn51pcaf9nw', password='sNwAPpmFIKjYG17iwZKJ', database ="bk3mjn0digzdwyfts1ir")
 
 
@@ -67,3 +68,8 @@ def Searching(Service,MasterID,con):
         else:
             print("No service Found")
             return False
+
+
+def PassGen(Lenght=16):
+    P="".join(random.choices(string.ascii_letters + string.digits + string.punctuation , k=Lenght))
+    return P

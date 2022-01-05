@@ -5,7 +5,6 @@ from PIL import Image, ImageTk
 from module import *
 from tkWinSwitch import *
 from tkinter import messagebox
-from PasswordGen import *
 
 root=Tk()
 #functions for buttons and other widgets
