@@ -42,6 +42,8 @@ def ShowServiceOut():
         for i in All:
             ListBox.insert(N,f"{i}")
             N+=1
+    if ServiceOut==False:
+        ListBox.insert(0,"NO Result found !")
     else:
         pass
 
