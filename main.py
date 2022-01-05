@@ -234,6 +234,45 @@ def GenSetBack():
 GoBack=genSet.addWi(Button(generatorWidget,text="GO Back !",bg="grey",fg="white",command=GenSetBack))
 genSet.grid(GoBack,row=4,column=2,pady=10)
 
+def Info():
+    x=IDInput.get()
+    y=PasswordInput.get()
+    z=ConfpassInput.get()
+    if y==z:
+        addUser(x,y,conn)
+
+
+SignUp= wiSet()
+
+ID=Label(text="User ID")
+SignUp.addWi(ID)
+SignUp.grid(ID,row=0,column=0)
+
+PassWord=Label(text="Password")
+SignUp.addWi(PassWord)
+SignUp.grid(PassWord,row=1,column=0)
+
+ConfPassword=Label(text="Confirm Password")
+SignUp.addWi(ConfPassword)
+SignUp.grid(ConfPassword,row=2,column=0)
+
+
+IDInput=Entry()
+SignUp.addWi(IDInput)
+SignUp.grid(IDInput,row=0,column=1)
+
+PasswordInput=Entry()
+SignUp.addWi(PasswordInput)
+SignUp.grid(PasswordInput,row=1,column=1)
+
+ConfpassInput=Entry()
+SignUp.addWi(ConfpassInput)
+SignUp.grid(ConfpassInput,row=2,column=1)
+
+Signup_Bttn=Button(text="SignUp !",command=Info)
+SignUp.addWi(Signup_Bttn)
+SignUp.grid(Signup_Bttn,row=3, columnspan=2)
+
 
 
 root.mainloop()
