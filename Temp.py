@@ -37,7 +37,7 @@ ConfpassInput=Entry()
 SignUp.addWi(ConfpassInput)
 SignUp.grid(ConfpassInput,row=2,column=1)
 
-Signup_Bttn=Button(text="SignUp !",command=Info)
+Signup_Bttn=Button(text="SignUp !",command=)
 SignUp.addWi(Signup_Bttn)
 SignUp.grid(Signup_Bttn,row=3, columnspan=2)
 
