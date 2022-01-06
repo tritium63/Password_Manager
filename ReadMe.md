@@ -40,7 +40,7 @@
     ·
     <a href="https://github.com/tritium63/Password_Manager/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/tritium63/Password_Manager/issues">Request Feature</a>
   </p>
 </div>
 
