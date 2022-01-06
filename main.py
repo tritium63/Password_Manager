@@ -130,10 +130,8 @@ def ShowServiceOut():
     Service=SearchBox.get()
     ServiceOut=Searching(Service, MasterID, con=conn)
     if ServiceOut != False:
-        All=[]
-        All.append(ServiceOut)
         N=0
-        for i in All:
+        for i in ServiceOut:
             ListBox.insert(N,f"{i}")
             N+=1
     else:

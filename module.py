@@ -64,10 +64,7 @@ def Searching(Service,MasterID,con):
             c.execute(f"select * from {MasterID} where service=\"{Service}\" ;")
             x=c.fetchall()
             return x
-        else:
-            print("No service Found")
-            return False
-
+    return False
 
 def PassGen(Lenght=16):
     P="".join(random.choices(string.ascii_letters + string.digits + string.punctuation , k=Lenght))
