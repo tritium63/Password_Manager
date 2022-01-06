@@ -163,10 +163,9 @@ def ShowServiceOut():
     Service=SearchBox.get()
     ServiceOut=Searching(Service, MasterID, con=conn)
     if ServiceOut != False:
-        All=[]
-        All.append(ServiceOut)
+        
         N=0
-        for i in All:
+        for i in ServiceOut:
             ListBox.insert(N,f"{i}")
             N+=1
     else:
@@ -183,7 +182,7 @@ def passvals():
     TempService=serviceNameval.get()
     UIDD=userIDval.get()
     if TempService=="" or UIDD=="" or TempPass=="":
-        messagebox.showerror("Invalid Input", "Feilds Cannot be Empty")
+        messagebox.showerror("Invalid Input", "Fields Cannot be Empty")
     else:
         addData(MasterID,TempService, UIDD, TempPass, conn)
         Pass.set("")
@@ -282,9 +281,12 @@ def Info():
             else:
                 if y==z:
                     status = addUser(x,y,conn)
-                if status==1:
-                    messagebox.showerror("User alredy exit","Sorry the username is alredy in use,\nPlese try a different one.")
-        except:
+                    if status==1:
+                        messagebox.showerror("User alredy exist","Sorry the username is alredy in use,\nPlease try a different one.")    
+                else:
+                    messagebox.showerror("Error","Password does not match")    
+        except Exception as e:
+            print(e)
             messagebox.showerror("Error","some error occured")
 
 #sign up screen
