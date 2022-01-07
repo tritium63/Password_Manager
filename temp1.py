@@ -42,12 +42,12 @@ loginLabel=LoginPage.addWi(Label(bgLabel,bg="grey"))
 LoginPage.place(loginLabel,rely=0.5,relx=0.5,anchor=CENTER)
 
 #variables for fonts used
-usualfont_tuple=("Comic Sans MS",12,"bold")
-headFont_tuple=("Comic Sans MS",16,"bold")
+usualfont_tuple=("sans serif",12,"bold")
+headFont_tuple=("sans serif",16,"bold")
 
 #Welcome Text 
 welText=LoginPage.addWi(Label(loginLabel, text="Welcome To Password Manager", font =headFont_tuple, bg="grey",fg="white"))
-LoginPage.grid(welText,row=0,column=1)
+LoginPage.grid(welText,row=0,column=1,columnspan=3)
 
 #taking entries of username and password
 username=LoginPage.addWi(Label(loginLabel, text="Username: ",font=usualfont_tuple,bg="grey",fg="white",pady=12,padx=12))
@@ -123,7 +123,7 @@ Display.pack(bgLabel,fill=BOTH,expand=TRUE)
 centLabel=Display.addWi(Label(bgLabel,bg="grey"))
 Display.place(centLabel,rely=0.5,relx=0.5,anchor=CENTER)
 
-ListBoxLabel=Label(centLabel,text="Login Info",font=("Comic Sans MS",16,BOLD),fg="white",bg="grey")
+ListBoxLabel=Label(centLabel,text="Login Info",font=("sans serif",16,BOLD),fg="white",bg="grey")
 ListBox=Listbox(centLabel,height = 10, width = 50, bg = "grey", activestyle = 'dotbox')
 
 sBox = StringVar()
@@ -193,8 +193,8 @@ def passvals():
 genSet=wiSet()
 
 #fonts
-headfont_tuple=("Comic Sans MS",16,"bold")
-generalFont=("Comic Sans MS",12,"bold")
+headfont_tuple=("sans serif",16,"bold")
+generalFont=("sans serif",12,"bold")
 
 #setting background
 bgLabel = Label(image=bgImageTk)
