@@ -138,7 +138,7 @@ Follow the link given below and install Python according to your platform
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* [GeekesforGeeks](https://www.geeksforgeeks.org/)
+* [GeeksforGeeks](https://www.geeksforgeeks.org/)
 * [StackOverflow](https://stackoverflow.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
