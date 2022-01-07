@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/tritium63/Password_Manager">
-    <img src="images/logo.gif" alt="Logo" width="80" height="80">
+    <img src="https://github.com/tritium63/Password_Manager/blob/Dev/images/Logo.gif" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Password Manager</h3>
@@ -40,7 +40,7 @@
     ·
     <a href="https://github.com/tritium63/Password_Manager/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/tritium63/Password_Manager/issues">Request Feature</a>
   </p>
 </div>
 
