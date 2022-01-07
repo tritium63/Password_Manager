@@ -79,3 +79,15 @@ def Searching(Service,MasterID,con):
 def PassGen(Lenght=16):
     P="".join(random.choices(string.ascii_letters + string.digits + string.punctuation , k=Lenght))
     return P
+
+def delrecord(MasterID,userID,con):
+    try:
+        query = f"delete from {MasterID} where USERID = \"{userID}\""
+        print(query)
+        c = con.cursor()
+        c.execute(query)
+        con.commit()
+        return 1
+    except Exception:
+        print(Exception)
+        return 0
