@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/tritium63/Password_Manager">
-    <img src="images/logo.gif" alt="Logo" width="80" height="80">
+    <img src="https://github.com/tritium63/Password_Manager/blob/master/images/Logo.gif" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Password Manager</h3>
