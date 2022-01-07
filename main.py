@@ -1,7 +1,8 @@
 #importing modules
 from tkinter import *
 from tkinter.font import BOLD
-from PIL import Image, ImageTk
+from PIL import Image,ImageTk
+from PIL import *
 from module import *
 from tkWinSwitch import *
 from tkinter import messagebox
@@ -22,34 +23,35 @@ def SubmitFn():
         print("Opps")        
 
 
-
+#Login Sceen
 #title
 root.geometry("1200x700")
 root.title("Password Manager - Login Page")
 
 LoginPage = wiSet()
 #setting background image
-bgImage=Image.open("Background Design - Password Manager.jpg") 
+bgImage=Image.open("newBg - Password Manager.jpg") 
+# bgImage=bgImage.resize((root.winfo_screenmmwidth(),root.winfo_screenmmheight()), Image.ANTIALIAS)
 bgImageTk= ImageTk.PhotoImage(bgImage)
 bgLabel = Label(image=bgImageTk)
 LoginPage.addWi(bgLabel)
 LoginPage.pack(bgLabel,fill=BOTH,expand=TRUE)
 
 #login widget
-loginLabel=LoginPage.addWi(Label(bgLabel,bg="black"))
+loginLabel=LoginPage.addWi(Label(bgLabel,bg="grey"))
 LoginPage.place(loginLabel,rely=0.5,relx=0.5,anchor=CENTER)
 
 #variables for fonts used
-usualfont_tuple=("Comic Sans MS",12,"bold")
-headFont_tuple=("Comic Sans MS",16,"bold")
+usualfont_tuple=("sans serif",12,"bold")
+headFont_tuple=("sans serif",16,"bold")
 
 #Welcome Text 
-welText=LoginPage.addWi(Label(loginLabel, text="Welcome To Password Manager", font =headFont_tuple, bg="black",fg="white"))
-LoginPage.grid(welText,row=0,column=1)
+welText=LoginPage.addWi(Label(loginLabel, text="Welcome To Password Manager", font =headFont_tuple, bg="grey",fg="white"))
+LoginPage.grid(welText,row=0,column=1,columnspan=3)
 
 #taking entries of username and password
-username=LoginPage.addWi(Label(loginLabel, text="Username: ",font=usualfont_tuple,bg="black",fg="white",pady=12,padx=12))
-password=LoginPage.addWi(Label(loginLabel,text="Paswword: ",font=usualfont_tuple,bg="black",fg="white"))
+username=LoginPage.addWi(Label(loginLabel, text="Username: ",font=usualfont_tuple,bg="grey",fg="white",pady=12,padx=12))
+password=LoginPage.addWi(Label(loginLabel,text="Paswword: ",font=usualfont_tuple,bg="grey",fg="white"))
 LoginPage.grid(username,row=1,column=0)
 LoginPage.grid(password,row=2,column=0)
 
@@ -66,15 +68,19 @@ LoginPage.grid(passentry,row=2,column=1,padx=10)
 
 #Creating submit button
 submitBtn=LoginPage.addWi(Button(loginLabel, bg="grey", text="LOGIN",fg="white",command=SubmitFn))
-LoginPage.grid(submitBtn,row=3,column=1)
+LoginPage.grid(submitBtn,row=3,column=1,pady=10)
 
-signbtn = Button(loginLabel,text="create a new account",command=lambda :switch(LoginPage,SignUp))
+signupText=Label(loginLabel,text="Don't have an account? Sign Up.",font=usualfont_tuple,bg="grey",fg="white")
+LoginPage.addWi(signupText)
+LoginPage.grid(signupText,row=4,column=1)
+signbtn = Button(loginLabel,text="Sign Up",command=lambda :switch(LoginPage,SignUp),bg="grey",fg="white")
 LoginPage.addWi(signbtn)
-LoginPage.grid(signbtn,row=4,column = 1)
+LoginPage.grid(signbtn,row=5,column=1,pady=5)
 LoginPage.create()
 
+#ending of login page
 
-# createing the menu page
+# menu page
 
 def logout():
     global MasterID
@@ -82,30 +88,56 @@ def logout():
     MasterID = ""
 MenuPage = wiSet()
 
-btn1 = MenuPage.addWi(Button(root,text="log out",command=logout))
-btn2 = MenuPage.addWi(Button(root,text="retrieve password",command = lambda :switch(MenuPage,Display)))
-btn3 = MenuPage.addWi(Button(root,text="add record", command=lambda :switch(MenuPage, genSet)))
+#setting background
+bgLabel = Label(image=bgImageTk)
+MenuPage.addWi(bgLabel)
+MenuPage.pack(bgLabel,fill=BOTH,expand=TRUE)
 
-MenuPage.pack(btn1)
-MenuPage.pack(btn2)
-MenuPage.pack(btn3)
+#login widget
+greyLabel=MenuPage.addWi(Label(bgLabel,bg="grey"))
+MenuPage.place(greyLabel,rely=0.5,relx=0.5,anchor=CENTER)
+
+menuText=Label(greyLabel,text="What do you want to do?",font=headFont_tuple,fg="white",bg="grey")
+MenuPage.addWi(menuText)
+MenuPage.pack(menuText,pady=10,padx=50)
 
 
+
+btn2 = MenuPage.addWi(Button(greyLabel,text="Retrieve Password",command = lambda :switch(MenuPage,Display),fg="white",bg="grey",font=usualfont_tuple))
+btn3 = MenuPage.addWi(Button(greyLabel,text="Add Record", command=lambda :switch(MenuPage, genSet),fg="white",bg="grey",font=usualfont_tuple))
+btn1 = MenuPage.addWi(Button(greyLabel,text="Logout",command=logout,fg="white",bg="grey",font=usualfont_tuple))
+
+MenuPage.pack(btn2,pady=10)
+MenuPage.pack(btn1,pady=10)
+MenuPage.pack(btn3,pady=10)
+#ending of menu page
+
+#display pass screen
 Display=wiSet()
 
-ListBoxLabel=Label(text="LogIn")
-ListBox=Listbox(height = 10, width = 50, bg = "grey", activestyle = 'dotbox')
+#setting background
+bgLabel = Label(image=bgImageTk)
+Display.addWi(bgLabel)
+Display.pack(bgLabel,fill=BOTH,expand=TRUE)
+
+centLabel=Display.addWi(Label(bgLabel,bg="grey"))
+Display.place(centLabel,rely=0.5,relx=0.5,anchor=CENTER)
+
+ListBoxLabel=Label(centLabel,text="Login Info",font=("sans serif",16,BOLD),fg="white",bg="grey")
+ListBox=Listbox(centLabel,height = 10, width = 50, bg = "grey", activestyle = 'dotbox')
 
 sBox = StringVar()
-SearchBox=Entry(text="Enter Service Name",textvariable=sBox)
+searchBoxText=Label(centLabel,text="Enter Service Name:",font=usualfont_tuple,fg="white",bg="grey")
+SearchBox=Entry(centLabel,text="Enter Service Name",textvariable=sBox,width=30)
 
 
-Search=Button(text="Search", command= lambda : ShowServiceOut())
-Exit=Button(text="Go Back", command= lambda : Exit())
+Search=Button(centLabel,text="Search", command= lambda : ShowServiceOut(),fg="white",bg="grey")
+Exit=Button(centLabel,text="Go Back", command= lambda : Exit(),fg="white",bg="grey")
 
 
 Display.addWi(ListBoxLabel)
 Display.addWi(ListBox)
+Display.addWi(searchBoxText)
 Display.addWi(SearchBox)
 Display.addWi(Search)
 Display.addWi(Exit)
@@ -113,9 +145,10 @@ Display.addWi(Exit)
 
 Display.pack(ListBoxLabel)
 Display.pack(ListBox)
+Display.pack(searchBoxText,pady=20)
 Display.pack(SearchBox)
-Display.pack(Search)
-Display.pack(Exit)
+Display.pack(Search,pady=20)
+Display.pack(Exit,pady=10)
 
 
 def Exit():
@@ -130,6 +163,7 @@ def ShowServiceOut():
     Service=SearchBox.get()
     ServiceOut=Searching(Service, MasterID, con=conn)
     if ServiceOut != False:
+        
         N=0
         for i in ServiceOut:
             ListBox.insert(N,f"{i}")
@@ -148,7 +182,7 @@ def passvals():
     TempService=serviceNameval.get()
     UIDD=userIDval.get()
     if TempService=="" or UIDD=="" or TempPass=="":
-        messagebox.showerror("Invalid Input", "Feilds Cannot be Empty")
+        messagebox.showerror("Invalid Input", "Fields Cannot be Empty")
     else:
         addData(MasterID,TempService, UIDD, TempPass, conn)
         Pass.set("")
@@ -159,36 +193,34 @@ def passvals():
 genSet=wiSet()
 
 #fonts
-headfont_tuple=("Comic Sans MS",16,"bold")
-generalFont=("Comic Sans MS",12,"bold")
+headfont_tuple=("sans serif",16,"bold")
+generalFont=("sans serif",12,"bold")
 
 #setting background
-bgImage=Image.open("Background Design - Password Manager.jpg") 
-bgImageTk= ImageTk.PhotoImage(bgImage)
 bgLabel = Label(image=bgImageTk)
 genSet.addWi(bgLabel)
 genSet.pack(bgLabel,fill=BOTH,expand=TRUE)
 
 
 
-generatorWidget=Label(bgLabel,bg="black")
-# generatorWidget.place(relx=0.5,rely=0.5,anchor=CENTER)
+generatorWidget=Label(bgLabel,bg="grey")
+# generatorWidget.place(relx=0.5,rely=0.5,anchor=CENTER)                    
 genSet.addWi(generatorWidget)
 genSet.place(generatorWidget, relx=0.5,rely=0.5, anchor=CENTER)
 # Heading Text
-headText=Label(generatorWidget,text="New UID and Password Generation", font=headfont_tuple,bg="black",fg="white",padx=30)
+headText=Label(generatorWidget,text="New UID and Password Generation", font=headfont_tuple,bg="grey",fg="white",padx=30)
 # headText.grid(row=0,column=1)
 genSet.addWi(headText)
 genSet.grid(headText,row=0,column=1)
 
 # #entry fields
-userID=Label(generatorWidget,text="User ID:",font=generalFont,bg="black",fg="white",pady=10)
+userID=Label(generatorWidget,text="User ID:",font=generalFont,bg="grey",fg="white",pady=10)
 # userID.grid(row=1,column=0)
 genSet.addWi(userID)
 genSet.grid(userID,row=1,column=0)
 
 
-passWord=Label(generatorWidget,text="Password:",font=generalFont,bg="black",fg="white")
+passWord=Label(generatorWidget,text="Password:",font=generalFont,bg="grey",fg="white")
 # passWord.grid(row=2,column=0)
 genSet.addWi(passWord)
 genSet.grid(passWord,row=2,column=0)
@@ -200,7 +232,7 @@ genSet.addWi(PasswordEntry)
 genSet.grid(PasswordEntry,row=2,column=1,columnspan=2)
 
 
-serviceName=Label(generatorWidget,text="Service Name:",font=generalFont,bg="black",fg="white",pady=10)
+serviceName=Label(generatorWidget,text="Service Name:",font=generalFont,bg="grey",fg="white",pady=10)
 # serviceName.grid(row=3,column=0)
 genSet.addWi(serviceName)
 genSet.grid(serviceName,row=3,column=0)
@@ -249,43 +281,55 @@ def Info():
             else:
                 if y==z:
                     status = addUser(x,y,conn)
-                if status==1:
-                    messagebox.showerror("User alredy exit","Sorry the username is alredy in use,\nPlese try a different one.")
-        except:
+                    if status==1:
+                        messagebox.showerror("User alredy exist","Sorry the username is alredy in use,\nPlease try a different one.")    
+                else:
+                    messagebox.showerror("Error","Password does not match")    
+        except Exception as e:
+            print(e)
             messagebox.showerror("Error","some error occured")
 
+#sign up screen
 SignUp= wiSet()
 
-ID=Label(text="User ID")
+#setting background
+bgLabel = Label(image=bgImageTk)
+SignUp.addWi(bgLabel)
+SignUp.pack(bgLabel,fill=BOTH,expand=TRUE)
+
+signLabel=SignUp.addWi(Label(bgLabel,bg="grey"))
+SignUp.place(signLabel,rely=0.5,relx=0.5,anchor=CENTER)
+
+ID=Label(signLabel,text="User ID:",font=usualfont_tuple,fg="white",bg="grey")
 SignUp.addWi(ID)
 SignUp.grid(ID,row=0,column=0)
 
-PassWord=Label(text="Password")
+PassWord=Label(signLabel,text="Password:",font=usualfont_tuple,fg="white",bg="grey")
 SignUp.addWi(PassWord)
 SignUp.grid(PassWord,row=1,column=0)
 
-ConfPassword=Label(text="Confirm Password")
+ConfPassword=Label(signLabel,text="Confirm Password:",font=usualfont_tuple,fg="white",bg="grey")
 SignUp.addWi(ConfPassword)
 SignUp.grid(ConfPassword,row=2,column=0)
 
 s1 = StringVar()
-IDInput=Entry(textvariable=s1)
+IDInput=Entry(signLabel,textvariable=s1)
 SignUp.addWi(IDInput)
 SignUp.grid(IDInput,row=0,column=1)
 
 s2=StringVar()
-PasswordInput=Entry(textvariable=s2)
+PasswordInput=Entry(signLabel,textvariable=s2)
 SignUp.addWi(PasswordInput)
 SignUp.grid(PasswordInput,row=1,column=1)
 
 s3=StringVar()
-ConfpassInput=Entry(textvariable=s3)
+ConfpassInput=Entry(signLabel,textvariable=s3)
 SignUp.addWi(ConfpassInput)
-SignUp.grid(ConfpassInput,row=2,column=1)
+SignUp.grid(ConfpassInput,row=2,column=1,padx=10)
 
-Signup_Bttn=Button(text="SignUp !",command=Info)
+Signup_Bttn=Button(signLabel,text="Sign Up",command=Info,fg="white",bg="grey")
 SignUp.addWi(Signup_Bttn)
-SignUp.grid(Signup_Bttn,row=3, columnspan=2)
+SignUp.grid(Signup_Bttn,row=3, columnspan=2,pady=10)
 
 def sgGo():
     s1.set("")
@@ -293,8 +337,8 @@ def sgGo():
     s3.set("")
     switch(SignUp,LoginPage)
 
-signBack=Button(text="Go Back",command=lambda :sgGo())
+signBack=Button(signLabel,text="Go Back",command=lambda :sgGo(),fg="white",bg="grey")
 SignUp.addWi(signBack)
-SignUp.grid(signBack,row=4, columnspan=2)
+SignUp.grid(signBack,row=4, columnspan=2,pady=10)
 
 root.mainloop()
