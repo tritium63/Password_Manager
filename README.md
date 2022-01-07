@@ -120,8 +120,7 @@ Follow the link given below and install Python according to your platform
 
 ### Front End 
   [Raghav](https://github.com/Raghav-628)<br>
-  [Aditya](https://github.com/adityasabkb)  
-  [Aditya Bakshi](https://github.com/ad1ttyya)
+
 
 
 ### Project Integration 
