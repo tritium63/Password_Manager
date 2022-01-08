@@ -80,9 +80,9 @@ def PassGen(Lenght=16):
     P="".join(random.choices(string.ascii_letters + string.digits + string.punctuation , k=Lenght))
     return P
 
-def delrecord(MasterID,userID,con):
+def delrecord(MasterID,userID,service,con):
     try:
-        query = f"delete from {MasterID} where USERID = \"{userID}\""
+        query = f"delete from {MasterID} where USERID = \"{userID}\" and SERVICE = \"{service}\""
         print(query)
         c = con.cursor()
         c.execute(query)

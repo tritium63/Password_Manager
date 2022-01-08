@@ -1,5 +1,4 @@
 #importing modules
-from abc import update_abstractmethods
 from tkinter import *
 from tkinter import font
 from tkinter.font import BOLD
@@ -232,9 +231,9 @@ passWord=Label(generatorWidget,text="Password:",font=generalFont,bg="grey",fg="w
 genSet.addWi(passWord)
 genSet.grid(passWord,row=2,column=0)
 
-Pass=StringVar()
+adPass=StringVar()
 
-PasswordEntry=Entry(generatorWidget, width=75, textvariable=Pass)
+PasswordEntry=Entry(generatorWidget, width=75, textvariable=adPass)
 genSet.addWi(PasswordEntry)
 genSet.grid(PasswordEntry,row=2,column=1,columnspan=2)
 
@@ -260,13 +259,13 @@ submitBtn=Button(generatorWidget,text="Submit",bg="grey",fg="white",command=pass
 genSet.addWi(submitBtn)
 genSet.grid(submitBtn,row=4,column=0,pady=10)
 
-GenPass=Button(generatorWidget,text="Generate Random Password",bg="grey",fg="white",command=lambda:ShowPass(Pass))
+GenPass=Button(generatorWidget,text="Generate Random Password",bg="grey",fg="white",command=lambda : ShowPass(adPass))
 genSet.addWi(GenPass)
 genSet.grid(GenPass,row=4,column=1,pady=10)
 
 
 def GenSetBack():
-    Pass.set("")
+    adPass.set("")
     UVar.set("")
     SVar.set("")
     switch(genSet, MenuPage)
@@ -430,7 +429,8 @@ updateset.grid(GoBackBtn,row=9,column=0,pady=10)
 #defining function
 def deleteRec():
     username=userAccVal.get()
-    delrecord(MasterID,username,conn)
+    service = userServiceVal.get()
+    delrecord(MasterID,username,service,conn)
 
 #initializing
 delSet=wiSet()
@@ -461,6 +461,10 @@ delSet.grid(userAcc,row=2,column=0,pady=(40,10))
 userAccVal=delSet.addWi(Entry(greyBg,width=65))
 delSet.grid(userAccVal,row=2,column=2,pady=(40,10),padx=(0,10))
 
+userService=delSet.addWi(Label(greyBg,text="Enter Service:",font=usualfont_tuple,fg="white",bg="grey"))
+delSet.grid(userService,row=3,column=0,pady=(40,10))
+userServiceVal=delSet.addWi(Entry(greyBg,width=65))
+delSet.grid(userServiceVal,row=3,column=2,pady=(40,10),padx=(0,10))
 ##just in case for need of password
 # wordPass=delSet.addWi(Label(greyBg,text="Enter Password to confirm:",font=usualfont_tuple,fg="white",bg="grey"))
 # delSet.grid(wordPass,row=3,column=0,pady=10,padx=(10,0))
