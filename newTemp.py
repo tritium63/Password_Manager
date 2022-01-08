@@ -1,6 +1,7 @@
 #importing modules
 from abc import update_abstractmethods
 from tkinter import *
+from tkinter import font
 from tkinter.font import BOLD
 from PIL import Image,ImageTk
 from PIL import *
@@ -68,7 +69,6 @@ LoginPage.grid(passentry,row=2,column=1,padx=10)
 
 
 
-
 #Creating submit button
 submitBtn=LoginPage.addWi(Button(loginLabel, bg="grey", text="LOGIN",fg="white",command=SubmitFn))
 LoginPage.grid(submitBtn,row=3,column=1,pady=10)
@@ -109,11 +109,13 @@ MenuPage.pack(menuText,pady=10,padx=50)
 btn2 = MenuPage.addWi(Button(greyLabel,text="Retrieve Password",command = lambda :switch(MenuPage,Display),fg="white",bg="grey",font=usualfont_tuple))
 btn3 = MenuPage.addWi(Button(greyLabel,text="Add Record", command=lambda :switch(MenuPage, genSet),fg="white",bg="grey",font=usualfont_tuple))
 btn4=MenuPage.addWi(Button(greyLabel,text="Update Existing Password",fg="white",bg="grey",font=usualfont_tuple,command=switchUpdate))
+btn5=MenuPage.addWi(Button(greyLabel,text="Delete Existing Record",fg="white",bg="grey",font=usualfont_tuple,command=lambda:switch(MenuPage,delSet)))
 btn1 = MenuPage.addWi(Button(greyLabel,text="Logout",command=logout,fg="white",bg="grey",font=usualfont_tuple))
 
 MenuPage.pack(btn2,pady=10)
 MenuPage.pack(btn1,pady=10)
 MenuPage.pack(btn4,pady=10)
+MenuPage.pack(btn5,pady=10)
 MenuPage.pack(btn3,pady=10)
 #ending of menu page
 
@@ -370,6 +372,8 @@ updateset.pack(bgLabel,fill=BOTH,expand=TRUE)
 
 greyBg=updateset.addWi(Label(bgLabel,bg="grey"))
 updateset.place(greyBg,rely=0.5,relx=0.5,anchor=CENTER)
+greyBg=updateset.addWi(Label(bgLabel,bg="grey"))
+updateset.place(greyBg,rely=0.5,relx=0.5,anchor=CENTER)
 
 #heading text
 headingText=updateset.addWi(Label(greyBg,text="Updating Password",font=headfont_tuple,fg="white",bg="grey"))
@@ -422,5 +426,52 @@ GoBackBtn=updateset.addWi(Button(greyBg,text="GO Back !",bg="grey",fg="white",co
 updateset.grid(GoBackBtn,row=9,column=0,pady=10)
 
 
+##Deletion screen
+#defining function
+def deleteRec():
+    username=userAccVal.get()
+    delrecord(MasterID,username,conn)
+
+#initializing
+delSet=wiSet()
+def passval():
+    print("rec deleted")
+
+#setting background
+bgLabel = Label(image=bgImageTk)
+delSet.addWi(bgLabel)
+delSet.pack(bgLabel,fill=BOTH,expand=TRUE)
+
+#grey layout
+greyBg=delSet.addWi(Label(bgLabel,bg="grey"))
+delSet.place(greyBg,rely=0.5,relx=0.5,anchor=CENTER)
+
+#Heading
+intitialText=delSet.addWi(Label(greyBg,text="Delete Record Here",font=("Comic Sans MS",16,BOLD),bg="grey",fg="white",width=50,height=100))
+delSet.place(intitialText,relx=0.5,rely=0.1,anchor=CENTER)
+
+#entry fields
+# servName=delSet.addWi(Label(greyBg,text="Enter Service Name: ",font=usualfont_tuple,bg="grey",fg="white"))
+# delSet.grid(servName,row=1,column=0,pady=(50,10))
+# servNameVal=delSet.addWi(Entry(greyBg,width=65))
+# delSet.grid(servNameVal,row=1,column=2,pady=(50,10),padx=(0,10))
+
+userAcc=delSet.addWi(Label(greyBg,text="Enter User ID:",font=usualfont_tuple,fg="white",bg="grey"))
+delSet.grid(userAcc,row=2,column=0,pady=(40,10))
+userAccVal=delSet.addWi(Entry(greyBg,width=65))
+delSet.grid(userAccVal,row=2,column=2,pady=(40,10),padx=(0,10))
+
+##just in case for need of password
+# wordPass=delSet.addWi(Label(greyBg,text="Enter Password to confirm:",font=usualfont_tuple,fg="white",bg="grey"))
+# delSet.grid(wordPass,row=3,column=0,pady=10,padx=(10,0))
+# wordPassVal=delSet.addWi(Entry(greyBg,width=65))
+# delSet.grid(wordPassVal,row=3,column=2,pady=10,padx=(0,10))
+
+DelBtn=delSet.addWi(Button(greyBg,text="Delete Record",fg="white",bg="grey",command=deleteRec))
+delSet.grid(DelBtn,row=4,column=2,pady=10)
+
+#BACK BUTTON
+BackBtn=delSet.addWi(Button(greyBg,text="GO Back",bg="grey",fg="white",command=lambda: switch(delSet,MenuPage)))
+delSet.grid(BackBtn,row=4,column=0,pady=10)
 
 root.mainloop()
