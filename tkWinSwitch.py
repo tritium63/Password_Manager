@@ -5,7 +5,7 @@ class wiSet():
         for i in self.wiList:
             if i[0]==widget:
                 raise Exception(f"the widget alredy exists in {self},\n you can just place,pack or grid it")
-        self.wiList.append([widget,lambda :widget.pack(),lambda :widget.pack_forget()])
+        self.wiList.append([widget,lambda : print(),lambda :print ()])
         return widget
 
     def place(self,wi,**kwargs):

@@ -1,0 +1,58 @@
+class wiSet()
+    This class is for keeping record of all widgets on a particular page
+    wiSet ~ widget set
+
+    It contains the following methods:
+
+    def __init__(self)
+        it is the initialising functions
+        it creates an empty list -> self.wiList = []
+        to keep record of widgets in the set
+    
+    #lets say we had two widgets w1 and w2
+    #self.wiList will contain elements like:
+    
+    [ [w1 , how to pack w1, how to unpack w1] , [w2 , how to pack w2, how to unpack w2]]
+
+    def addWi(self,widget):
+        this adds [widget,lambda :print(),lambda :print()]
+        to the wiList
+
+        lambda : print()
+        is used because it is unknown how to pack/grid/place  <-(methods of displaying) the widget
+
+    def pack(self,wi,**kwargs):
+        this specifies that wi (widget) is to be packed and properties of packing are
+        given as **kwargs
+        
+
+    def place(self,wi,**kwargs):
+        this specifies that wi (widget) is to be placed and properties of placing are
+        given as **kwargs
+    
+    def grid(self,wi,**kwargs):
+        this specifies that wi (widget) is to be grid and properties of griding are
+        given as **kwargs
+
+    #after packing/placing/griding 
+    we know how to pack/grid/place the particular widget
+    so lambda : print() will be replace by respective functions to display the widget
+
+    def create(self):
+        
+        This method starts executing the displaying functions of all widgets
+        in self.wiList
+    
+    def dest(self):
+
+        This fucntion is meant to stop displaying the widgets
+        in self.wiList
+
+
+def switch(a,b):
+    this takes two wiSet(s)
+    'a' is the set which is being displayed currently
+    'b' is the set which is to be displayed instead of 'a'
+    so we execute
+    a.dest()
+    b.create()
