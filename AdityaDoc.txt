@@ -1,0 +1,37 @@
+def addUser(USERID,PASSWORD,con)
+
+    This function is used to create a user account
+    It takes the following arguments:
+        userid = username of the user
+        password = password user has entered
+        con = this is the connection variable
+
+def addData(USERID,service,username,password,con)
+
+    This funcition is used to add the new record of username and password
+    entered by the user into the table designated to the user in 'remote database'
+
+    It takes the following arguments:
+        USERID = The Main userID of the user in our database
+        service = The service related to which the username is (eg. google)
+        username = The username user wants to save
+        password = password user wants to save
+        con = connection variable
+
+def delrecord(MasterID,userID,service,con)
+
+    This function is used to delete a existing record.
+
+    It takes the following arguments:
+    MasterID = The Main userID of the user stored in our database
+    userID = the username he wants to delete
+    service = the service related to the username
+
+    *Why we take both username and servicee:
+    
+     It is possible that same userid is used at two different places
+
+     For example, many sites allow sgning in by google account
+     So you have same id used at different services
+     So if you have to delete a particular one,
+     you "need to specify both username and service"
