@@ -352,7 +352,10 @@ def UpdatePass():
     userId=askUserVal.get()
     service=askServiceVal.get()
     newPass=newPassVal.get()
-    Update(MasterID,userId,service,newPass,conn)
+    if Update(MasterID,userId,service,newPass,conn):
+        switch(updateset,MenuPage)
+    else:
+        messagebox.showerror("The Entry Does not exist ")
 
     
 

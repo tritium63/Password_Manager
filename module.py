@@ -4,12 +4,16 @@ conn = mysql.connector.connect(host = 'bk3mjn0digzdwyfts1ir-mysql.services.cleve
 
 def Update(MasterID,UserID, Service, PassWord,con): 
     c=con.cursor()
-    try:
-        c.execute(f"update {MasterID} SET PASSWORD=\"{PassWord}\" WHERE USERID=\"{UserID}\" AND SERVICE=\"{Service}\";")
-        con.commit()
-        return True
-    except Exception as e:
-        print(e)
+    c.execute(f"select * from {MasterID} where SERVICE=\"{Service}\" AND USERID=\"{UserID}\"")
+    templis=c.fetchall()
+    if templis!=[]:
+        try:
+            c.execute(f"update {MasterID} SET PASSWORD=\"{PassWord}\" WHERE USERID=\"{UserID}\" AND SERVICE=\"{Service}\";")
+            con.commit()
+            return True
+        except Exception as e:
+            print(e)
+    else:
         return False
 
 
@@ -83,7 +87,6 @@ def PassGen(Lenght=16):
 def delrecord(MasterID,userID,service,con):
     try:
         query = f"delete from {MasterID} where USERID = \"{userID}\" and SERVICE = \"{service}\""
-        print(query)
         c = con.cursor()
         c.execute(query)
         con.commit()
