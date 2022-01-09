@@ -1,0 +1,30 @@
+UserVerification(MasterID, MasterPass,con)
+    This funcition is used to verify if the users exists in the database
+    the funcition takes the following arguments
+        MasterID == The username that has to be verified
+        MasterPass == The corrosponding password
+        con == the SQL connecter objecte that is used universally
+
+
+Searching(Service,MasterID,con)
+    this funcition is used to search and reteave user entries by matching them with the provided service name 
+    the funcition takes the following arguments
+           Service == The service name that has to be searched
+           MasterID == The username of the user 
+           con == the SQL connecter objecte that is used universally
+
+
+PassGen(Lenght=16)
+    this function is used to generate random password using random function
+    the funcition takes the following arguments
+        Lenght == This is used to specify password lenght. The default argument value is 16
+
+
+Update(MasterID,UserID, Service, PassWord,con)
+    used to update perexisting ent in database
+    the funcition takes the following arguments
+            MasterID == The username of the user
+            UserID == This the the User id that has its password generated and stored in database
+            service == this is the matching service which requres its password updated
+            PassWord == The new PassWord that has to be set
+            con == the SQL connecter objecte that is used universally
