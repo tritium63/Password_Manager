@@ -77,7 +77,7 @@ def Searching(Service,MasterID,con):
     return False
 
 def PassGen(Lenght=16):
-    P="".join(random.choices(string.ascii_letters + string.digits + string.punctuation , k=Lenght))
+    P="".join(random.choices(string.ascii_letters + string.digits , k=Lenght))
     return P
 
 def delrecord(MasterID,userID,service,con):

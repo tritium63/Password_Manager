@@ -14,14 +14,13 @@ def SubmitFn():
     global MasterID
     MID=userentry.get()
     MPWD=passentry.get()
-    print(MID, MPWD)
     if UserVerification(MID,MPWD,conn):
         switch(LoginPage,MenuPage)
         MasterID = MID
         uservalue.set('')
         passvalue.set('')
     else:
-        print("Opps")        
+        messagebox.showerror("LogIn Failed","Login Failed,\nTry again")    
 
 def switchUpdate():
     switch(MenuPage,updateset)
@@ -291,8 +290,7 @@ def Info():
                         messagebox.showerror("User alredy exist","Sorry the username is alredy in use,\nPlease try a different one.")    
                 else:
                     messagebox.showerror("Error","Password does not match")    
-        except Exception as e:
-            print(e)
+        except:
             messagebox.showerror("Error","some error occured")
 
 #sign up screen
@@ -354,7 +352,6 @@ def UpdatePass():
     userId=askUserVal.get()
     service=askServiceVal.get()
     newPass=newPassVal.get()
-    print(MasterID,userId,service,newPass)
     Update(MasterID,userId,service,newPass,conn)
 
     
