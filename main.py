@@ -1,5 +1,6 @@
 #importing modules
 from tkinter import *
+from tkinter import font
 from tkinter.font import BOLD
 from PIL import Image,ImageTk
 from PIL import *
@@ -13,15 +14,16 @@ def SubmitFn():
     global MasterID
     MID=userentry.get()
     MPWD=passentry.get()
-    print(MID, MPWD)
     if UserVerification(MID,MPWD,conn):
         switch(LoginPage,MenuPage)
         MasterID = MID
         uservalue.set('')
         passvalue.set('')
     else:
-        print("Opps")        
+        messagebox.showerror("LogIn Failed","Login Failed,\nTry again")    
 
+def switchUpdate():
+    switch(MenuPage,updateset)
 
 #Login Sceen
 #title
@@ -65,7 +67,6 @@ LoginPage.grid(passentry,row=2,column=1,padx=10)
 
 
 
-
 #Creating submit button
 submitBtn=LoginPage.addWi(Button(loginLabel, bg="grey", text="LOGIN",fg="white",command=SubmitFn))
 LoginPage.grid(submitBtn,row=3,column=1,pady=10)
@@ -105,10 +106,14 @@ MenuPage.pack(menuText,pady=10,padx=50)
 
 btn2 = MenuPage.addWi(Button(greyLabel,text="Retrieve Password",command = lambda :switch(MenuPage,Display),fg="white",bg="grey",font=usualfont_tuple))
 btn3 = MenuPage.addWi(Button(greyLabel,text="Add Record", command=lambda :switch(MenuPage, genSet),fg="white",bg="grey",font=usualfont_tuple))
+btn4=MenuPage.addWi(Button(greyLabel,text="Update Existing Password",fg="white",bg="grey",font=usualfont_tuple,command=switchUpdate))
+btn5=MenuPage.addWi(Button(greyLabel,text="Delete Existing Record",fg="white",bg="grey",font=usualfont_tuple,command=lambda:switch(MenuPage,delSet)))
 btn1 = MenuPage.addWi(Button(greyLabel,text="Logout",command=logout,fg="white",bg="grey",font=usualfont_tuple))
 
 MenuPage.pack(btn2,pady=10)
 MenuPage.pack(btn1,pady=10)
+MenuPage.pack(btn4,pady=10)
+MenuPage.pack(btn5,pady=10)
 MenuPage.pack(btn3,pady=10)
 #ending of menu page
 
@@ -173,9 +178,9 @@ def ShowServiceOut():
     if not ServiceOut:
         ListBox.insert(0,"no result found")
 
-def ShowPass():
-    Pass.set(PassGen())
-MasterID="TempID"
+def ShowPass(v):
+    v.set(PassGen())
+
 
 def passvals():
     TempPass=PasswordEntry.get()
@@ -225,9 +230,9 @@ passWord=Label(generatorWidget,text="Password:",font=generalFont,bg="grey",fg="w
 genSet.addWi(passWord)
 genSet.grid(passWord,row=2,column=0)
 
-Pass=StringVar()
+adPass=StringVar()
 
-PasswordEntry=Entry(generatorWidget, width=75, textvariable=Pass)
+PasswordEntry=Entry(generatorWidget, width=75, textvariable=adPass)
 genSet.addWi(PasswordEntry)
 genSet.grid(PasswordEntry,row=2,column=1,columnspan=2)
 
@@ -253,13 +258,13 @@ submitBtn=Button(generatorWidget,text="Submit",bg="grey",fg="white",command=pass
 genSet.addWi(submitBtn)
 genSet.grid(submitBtn,row=4,column=0,pady=10)
 
-GenPass=Button(generatorWidget,text="Generate Random Password",bg="grey",fg="white",command=ShowPass)
+GenPass=Button(generatorWidget,text="Generate Random Password",bg="grey",fg="white",command=lambda : ShowPass(adPass))
 genSet.addWi(GenPass)
 genSet.grid(GenPass,row=4,column=1,pady=10)
 
 
 def GenSetBack():
-    Pass.set("")
+    adPass.set("")
     UVar.set("")
     SVar.set("")
     switch(genSet, MenuPage)
@@ -285,8 +290,7 @@ def Info():
                         messagebox.showerror("User alredy exist","Sorry the username is alredy in use,\nPlease try a different one.")    
                 else:
                     messagebox.showerror("Error","Password does not match")    
-        except Exception as e:
-            print(e)
+        except:
             messagebox.showerror("Error","some error occured")
 
 #sign up screen
@@ -340,5 +344,135 @@ def sgGo():
 signBack=Button(signLabel,text="Go Back",command=lambda :sgGo(),fg="white",bg="grey")
 SignUp.addWi(signBack)
 SignUp.grid(signBack,row=4, columnspan=2,pady=10)
+
+
+#updation screen
+#fn definition
+def UpdatePass():
+    userId=askUserVal.get()
+    service=askServiceVal.get()
+    newPass=newPassVal.get()
+    Update(MasterID,userId,service,newPass,conn)
+
+    
+
+
+
+#initial
+updateset=wiSet()
+
+#setting background
+bgLabel = Label(image=bgImageTk)
+updateset.addWi(bgLabel)
+updateset.pack(bgLabel,fill=BOTH,expand=TRUE)
+
+greyBg=updateset.addWi(Label(bgLabel,bg="grey"))
+updateset.place(greyBg,rely=0.5,relx=0.5,anchor=CENTER)
+greyBg=updateset.addWi(Label(bgLabel,bg="grey"))
+updateset.place(greyBg,rely=0.5,relx=0.5,anchor=CENTER)
+
+#heading text
+headingText=updateset.addWi(Label(greyBg,text="Updating Password",font=headfont_tuple,fg="white",bg="grey"))
+updateset.grid(headingText,row=0,column=0,padx=200)
+#entry fields
+askService=updateset.addWi(Label(greyBg,text="Enter Service to change Password for:",font=usualfont_tuple,fg="white",bg="grey"))
+updateset.grid(askService,row=1,column=0,pady=20)
+
+askServiceVal=updateset.addWi(Entry(greyBg,width=30))
+updateset.grid(askServiceVal,row=2,column=0)
+
+askUser=updateset.addWi(Label(greyBg,text="Enter User ID to confirm",font=usualfont_tuple,bg="grey",fg="white"))
+updateset.grid(askUser,row=3,column=0,pady=20)
+
+askUserVal=updateset.addWi(Entry(greyBg,width=30))
+updateset.grid(askUserVal,row=4,column=0)
+
+
+
+newPass=updateset.addWi(Label(greyBg,text="New Password:",font=usualfont_tuple,fg="white",bg="grey"))
+updateset.grid(newPass,row=5,column=0,pady=5)
+
+# newPassVal=updateset.addWi(Entry(greyBg,width=30))
+# updateset.grid(newPassVal,row=6,column=0,pady=20)
+
+# passWordLabel=Label(greyBg,text="Password:",font=generalFont,bg="grey",fg="white")
+# # passWord.grid(row=2,column=0)
+# updateset.addWi(passWordLabel)
+# updateset.grid(passWordLabel,row=2,column=0)
+
+Pass=StringVar()
+
+upPass=StringVar()
+newPassVal=Entry(greyBg, width=30, textvariable=upPass)
+updateset.addWi(newPassVal)
+updateset.grid(newPassVal,row=6,column=0)
+
+
+#submit button
+SubmitBtn=updateset.addWi(Button(greyBg, bg="grey", text="Submit",fg="white",command=UpdatePass))
+updateset.grid(SubmitBtn,row=7,column=0,pady=10)
+#genPassButton
+
+GenPassBtn=Button(greyBg,text="Generate Random Password",bg="grey",fg="white",command=lambda:ShowPass(upPass))
+updateset.addWi(GenPassBtn)
+updateset.grid(GenPassBtn,row=8,column=0,pady=10)
+
+#BACK BUTTON
+GoBackBtn=updateset.addWi(Button(greyBg,text="GO Back !",bg="grey",fg="white",command=lambda: switch(updateset,MenuPage)))
+updateset.grid(GoBackBtn,row=9,column=0,pady=10)
+
+
+##Deletion screen
+#defining function
+def deleteRec():
+    username=userAccVal.get()
+    service = userServiceVal.get()
+    delrecord(MasterID,username,service,conn)
+
+#initializing
+delSet=wiSet()
+def passval():
+    print("rec deleted")
+
+#setting background
+bgLabel = Label(image=bgImageTk)
+delSet.addWi(bgLabel)
+delSet.pack(bgLabel,fill=BOTH,expand=TRUE)
+
+#grey layout
+greyBg=delSet.addWi(Label(bgLabel,bg="grey"))
+delSet.place(greyBg,rely=0.5,relx=0.5,anchor=CENTER)
+
+#Heading
+intitialText=delSet.addWi(Label(greyBg,text="Delete Record Here",font=("Comic Sans MS",16,BOLD),bg="grey",fg="white",width=50,height=100))
+delSet.place(intitialText,relx=0.5,rely=0.1,anchor=CENTER)
+
+#entry fields
+# servName=delSet.addWi(Label(greyBg,text="Enter Service Name: ",font=usualfont_tuple,bg="grey",fg="white"))
+# delSet.grid(servName,row=1,column=0,pady=(50,10))
+# servNameVal=delSet.addWi(Entry(greyBg,width=65))
+# delSet.grid(servNameVal,row=1,column=2,pady=(50,10),padx=(0,10))
+
+userAcc=delSet.addWi(Label(greyBg,text="Enter User ID:",font=usualfont_tuple,fg="white",bg="grey"))
+delSet.grid(userAcc,row=2,column=0,pady=(40,10))
+userAccVal=delSet.addWi(Entry(greyBg,width=65))
+delSet.grid(userAccVal,row=2,column=2,pady=(40,10),padx=(0,10))
+
+userService=delSet.addWi(Label(greyBg,text="Enter Service:",font=usualfont_tuple,fg="white",bg="grey"))
+delSet.grid(userService,row=3,column=0,pady=(40,10))
+userServiceVal=delSet.addWi(Entry(greyBg,width=65))
+delSet.grid(userServiceVal,row=3,column=2,pady=(40,10),padx=(0,10))
+##just in case for need of password
+# wordPass=delSet.addWi(Label(greyBg,text="Enter Password to confirm:",font=usualfont_tuple,fg="white",bg="grey"))
+# delSet.grid(wordPass,row=3,column=0,pady=10,padx=(10,0))
+# wordPassVal=delSet.addWi(Entry(greyBg,width=65))
+# delSet.grid(wordPassVal,row=3,column=2,pady=10,padx=(0,10))
+
+DelBtn=delSet.addWi(Button(greyBg,text="Delete Record",fg="white",bg="grey",command=deleteRec))
+delSet.grid(DelBtn,row=4,column=2,pady=10)
+
+#BACK BUTTON
+BackBtn=delSet.addWi(Button(greyBg,text="GO Back",bg="grey",fg="white",command=lambda: switch(delSet,MenuPage)))
+delSet.grid(BackBtn,row=4,column=0,pady=10)
 
 root.mainloop()
