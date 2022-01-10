@@ -1,0 +1,39 @@
+Documentation - Raghav
+
+def SubmitFn(): 
+This function has the purpose of executing the submit command. It changes the screen from the initial login page to the Menu Screen of the program. It checks if the credentials entered by the user match the Master ID and Master Password in the database with the help of UserVerification function. If the credentials match, it provides access to the various functionalities of the program, like adding, retrieving, updating and deleting user’s passwords.
+If the entries do not match, it displays an error message “Login failed, Try again”
+
+def switchUpdate():
+This function is defined as the command of “Go Back” button on the Updation screen of the program. Its purpose is to change screens from Updation screen to the Menu Screen of the program.
+
+def logout():
+Changes the screen from the Menu screen to the Login Page. Clears out the previously entered Master ID and Master Password fields.
+
+def Exit():
+This function is defined to clear out the display box on the Password Display Screen. It also has the purpose of changing the screen from Display Screen to the Menu Screen.
+
+def ShowServiceOut():
+The purpose of this function is to fetch the input in the Search box and match it to the Service and show the corresponding record of the user. The searchbox only takes Service name as the entry.
+
+def ShowPass():
+This function is used to generate a random password with the help of the PassGen() function.
+
+def passvals():
+It is used as the command for the Submit button on the Generating Password screen. This function adds data into the user’s table.
+
+def GenSetBack():
+This function clears out the entry fields on the Generating Password screen and changes the screen from Generating Password Screen to Menu Screen.
+
+def Info():
+This function fetches the values of the entry fields on the Sign Up screen and adds it into the Database, creating a table which is named after the Master ID of the user. Moreover, it checks whether the fields are empty, if the values in the entry fields exceeds the 32 character limit. It also checks if the username of the new user coincides with the username of an existing user. If so, it prompts the user, User already exists. Checks if the confirm password and password fields match.
+
+def sgGo():
+This function clears out the entry fields on the Sign Up screen and changes the screen from Sign Up Screen to  Login Screen
+
+def UpdatePass(): 
+This function fetches the values of the entry fields on the Update Screen, and updates the password for the given Service in the database for the specified User using Master ID. This is done by calling the function Update().
+
+def deleteRec():
+This function fetches the values of entry fields on the Deletion Screen and matches it with the corresponding service and User ID. If a match is found, it deletes the record. This is done by calling the function delrecord().
+
