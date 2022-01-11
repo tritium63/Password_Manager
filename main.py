@@ -355,7 +355,7 @@ def UpdatePass():
     if Update(MasterID,userId,service,newPass,conn):
         switch(updateset,MenuPage)
     else:
-        messagebox.showerror("The Entry Does not exist ")
+        messagebox.showerror("Err","The Entry Does not exist ")
 
     
 
