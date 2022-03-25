@@ -1,6 +1,6 @@
 import mysql.connector
 import random, string
-conn = mysql.connector.connect(host = 'bk3mjn0digzdwyfts1ir-mysql.services.clever-cloud.com', user ='umterzn51pcaf9nw', password='sNwAPpmFIKjYG17iwZKJ', database ="bk3mjn0digzdwyfts1ir")
+conn = mysql.connector.connect(host = 'bk3mjn0digzdwyfts1ir-mysql.services.clever-cloud.com', user ='umterzn51pcaf9nw', password='NQKckcvxBcKYTmGKBigD', database ="bk3mjn0digzdwyfts1ir")
 
 def Update(MasterID,UserID, Service, PassWord,con): 
     c=con.cursor()
